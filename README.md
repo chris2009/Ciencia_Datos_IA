@@ -9,14 +9,15 @@ Cada carpeta contiene los scripts y su propio README con descripción detallada.
 
 ## Áreas
 
-| # | Área | Carpeta | Notebooks | Descripción | Stack |
-|---|------|---------|-----------|-------------|-------|
-| 1 | Exploratory Data Analysis | [`EDA/`](EDA/) | 4 | EDA, transformaciones, outliers multivariados, calidad de datos, feature engineering y Visual Data Discovery | Python, Pandas, Seaborn, Scipy, Scikit-learn, PySpark, Databricks |
-| 2 | Machine Learning | [`Machine_Learning/`](Machine_Learning/) | 14 | Modelos supervisados y no supervisados implementados from scratch con NumPy, comparados contra scikit-learn | Python, NumPy, Matplotlib, Scikit-learn, imbalanced-learn, UMAP, TensorFlow |
+| # | Área | Carpeta | Archivos | Descripción |
+|---|------|---------|----------|-------------|
+| 1 | Exploratory Data Analysis | [`EDA/`](EDA/) | 4 notebooks | EDA, transformaciones, outliers, calidad de datos, feature engineering, Visual Data Discovery |
+| 2 | Machine Learning | [`Machine_Learning/`](Machine_Learning/) | 14 notebooks | Modelos supervisados y no supervisados implementados from scratch con NumPy + validación sklearn |
+| 3 | MISTI — MIT Intensive | [`MISTI/`](MISTI/) | 13 notebooks + 16 scripts | Programa intensivo MIT-Peru: fundamentos, ML clásico, Deep Learning y proyecto final SAFEGUARD |
 
 ---
 
-## Detalle de notebooks por área
+## Detalle por área
 
 ### EDA
 
@@ -32,19 +33,24 @@ Cada carpeta contiene los scripts y su propio README con descripción detallada.
 | # | Notebook | Algoritmo(s) | Tipo |
 |---|----------|-------------|------|
 | 1 | [Session2.0_Gradient Descent](Machine_Learning/Session2.0_Gradient%20Descent.ipynb) | Gradient Descent | Optimización |
-| 2 | [Session2.0_OLS](Machine_Learning/Session2.0_OLS.ipynb) | OLS + análisis de patologías | Regresión |
-| 3 | [Session2.1_Linear model](Machine_Learning/Session2.1_Linear%20model.ipynb) | OLS, Ridge, Lasso, GD, Polinomial | Regresión (BandGap) |
-| 4 | [Session3.0_LDA_Logistic](Machine_Learning/Session3.0_LDA_Logistic.ipynb) | LDA, Logística (Newton + SGD) | Clasificación |
-| 5 | [Session3.1_SVM](Machine_Learning/Session3.1_SVM.ipynb) | SVM lineal, Kernel SVM, SVR | Clasificación / Regresión |
+| 2 | [Session2.0_OLS](Machine_Learning/Session2.0_OLS.ipynb) | OLS + patologías | Regresión |
+| 3 | [Session2.1_Linear model](Machine_Learning/Session2.1_Linear%20model.ipynb) | OLS, Ridge, Lasso, GD, Polynomial | Regresión (BandGap) |
+| 4 | [Session3.0_LDA_Logistic](Machine_Learning/Session3.0_LDA_Logistic.ipynb) | LDA, Logística (Newton+SGD) | Clasificación |
+| 5 | [Session3.1_SVM](Machine_Learning/Session3.1_SVM.ipynb) | SVM lineal/kernel, SVR | Clasificación/Regresión |
 | 6 | [Session3.2_Random Forest](Machine_Learning/Session3.2_Random%20Forest.ipynb) | Random Forest | Clasificación |
-| 7 | [Session4.0_kMeans](Machine_Learning/Session4.0_kMeans.ipynb) | K-Means, K-Means++, MiniBatch | Clustering |
-| 8 | [Session4.0_kmedoids](Machine_Learning/Session4.0_kmedoids.ipynb) | PAM, CLARA | Clustering |
-| 9 | [Session4.0_Mean Shift](Machine_Learning/Session4.0_Mean%20Shift.ipynb) | KDE, Mean Shift | Clustering |
-| 10 | [Session4.0_EM](Machine_Learning/Session4.0_EM.ipynb) | GMM + EM, AIC/BIC | Clustering |
-| 11 | [Session4.1_Agglomerative](Machine_Learning/Session4.1_Agglomerative.ipynb) | Agglomerative (4 linkages) + Dendrogramas | Clustering |
-| 12 | [PCA](Machine_Learning/PCA.ipynb) | PCA from scratch | Reducción de dimensionalidad |
-| 13 | [Dimensional reduction](Machine_Learning/Dimensional%20reduction.ipynb) | PCA, t-SNE, UMAP | Reducción de dimensionalidad |
-| 14 | [Unbalanced](Machine_Learning/Unbalanced.ipynb) | Undersampling, Tomek Links, Oversampling | Clases desbalanceadas |
+| 7–11 | Sessions 4.x | K-Means, K-Medoids, Mean Shift, GMM-EM, Agglomerative | Clustering |
+| 12–13 | PCA / Dimensional reduction | PCA, t-SNE, UMAP | Reducción de dim. |
+| 14 | [Unbalanced](Machine_Learning/Unbalanced.ipynb) | Undersampling, Tomek, Oversampling | Clases desbalanceadas |
+
+### MISTI — MIT Intensive Program
+
+| Módulo | Contenido |
+|--------|-----------|
+| **Fundamentos** | 6 notebooks: NumPy arrays vectorizados, Pandas Series/DataFrame, missing data, operaciones, GroupBy/merge, I/O |
+| **EDA Semana 0** | 2 ejercicios resueltos: E-commerce (10K transacciones), SF Salaries (148K registros) |
+| **Semana 1** | 7 notebooks: California Housing (EDA + regresión + validación), Kobe shots (feature engineering + clasificación), Bike Sharing (gradient descent), intro redes neuronales, reducción de dimensionalidad |
+| **Semana 2** | 6 notebooks: CNN (arquitectura + feature maps), data augmentation para imágenes, validación de redes neuronales, Word Embeddings (Word2Vec/GloVe), Reinforcement Learning (Q-learning) |
+| **Proyecto SAFEGUARD** | Sistema completo de detección de caídas: 4 modelos (RF v1/v2 → LSTM → Transformer), pipeline BlazePose + feature engineering, demo en tiempo real, Recall=100% |
 
 ---
 
@@ -54,29 +60,22 @@ Cada carpeta contiene los scripts y su propio README con descripción detallada.
 Ciencia_Datos_IA/
 │
 ├── EDA/
-│   ├── EDA.ipynb
-│   ├── EDA_ejercicio_practico_Boston_Housing.ipynb
-│   ├── Transformaciones_Valores_Atpicos_Calidad_Datos.ipynb
-│   ├── Feature_Engineering_Data_Visualization.ipynb
-│   ├── Dataset/  (CSVs)
+│   ├── *.ipynb  (4 notebooks)
+│   ├── *.csv    (datasets)
 │   └── README.md
 │
 ├── Machine_Learning/
-│   ├── Session2.0_Gradient Descent.ipynb
-│   ├── Session2.0_OLS.ipynb
-│   ├── Session2.1_Linear model.ipynb
-│   ├── Session3.0_LDA_Logistic.ipynb
-│   ├── Session3.1_SVM.ipynb
-│   ├── Session3.2_Random Forest.ipynb
-│   ├── Session4.0_EM.ipynb
-│   ├── Session4.0_Mean Shift.ipynb
-│   ├── Session4.0_kMeans.ipynb
-│   ├── Session4.0_kmedoids.ipynb
-│   ├── Session4.1_Agglomerative.ipynb
-│   ├── Dimensional reduction.ipynb
-│   ├── PCA.ipynb
-│   ├── Unbalanced.ipynb
-│   ├── Dataset/  (BandGap, Lab1-4 folds)
+│   ├── Session*.ipynb  (14 notebooks)
+│   ├── *.ipynb         (PCA, Dim. Reduction, Unbalanced)
+│   ├── Dataset/        (BandGap, Lab1-4 folds)
+│   └── README.md
+│
+├── MISTI/
+│   ├── Fundamentos/    (6 notebooks NumPy + Pandas)
+│   ├── EDA/            (2 ejercicios resueltos)
+│   ├── week_1/         (7 notebooks ML clásico)
+│   ├── week_2/         (6 notebooks Deep Learning)
+│   ├── Proyecto_final_SAFEGUARD/  (16 scripts Python + 7 docs .md)
 │   └── README.md
 │
 ├── CLAUDE.md
@@ -85,10 +84,16 @@ Ciencia_Datos_IA/
 
 ---
 
-## Cómo navegar el repositorio
+## Tecnologías utilizadas
 
-Cada área tiene su propio `README.md` con:
-- **Índice de notebooks** con algoritmos, tipo y dataset
-- **Detalle por notebook**: concepto central, implementación, experimentos y hallazgos
-- **Análisis de calidad del código**: fortalezas y observaciones
-- **Stack tecnológico** y datasets utilizados
+| Categoría | Herramientas |
+|-----------|-------------|
+| Lenguajes | Python 3.x |
+| Data manipulation | NumPy, Pandas |
+| Visualización | Matplotlib, Seaborn |
+| ML clásico | scikit-learn, imbalanced-learn |
+| Deep Learning | TensorFlow / Keras |
+| Visión computacional | MediaPipe BlazePose, OpenCV |
+| NLP | Word2Vec, GloVe, FastText |
+| Dimensionalidad | UMAP, t-SNE |
+| Big Data | PySpark, Databricks |

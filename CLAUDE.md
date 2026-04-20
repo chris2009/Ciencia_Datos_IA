@@ -28,6 +28,7 @@ Cada área temática vive en su propia carpeta con:
 |------|---------|-----------|-------------|-------|
 | EDA | `EDA/` | 4 | EDA, transformaciones, outliers multivariados, calidad de datos, feature engineering, Visual Data Discovery | Python, Pandas, Seaborn, Scipy, Scikit-learn, PySpark, Databricks |
 | Machine Learning | `Machine_Learning/` | 14 | Modelos supervisados (regresión, clasificación) y no supervisados (clustering, reducción de dimensionalidad), todos from scratch + sklearn | Python, NumPy, Matplotlib, Scikit-learn, imbalanced-learn, UMAP, TensorFlow |
+| MISTI — MIT Intensive | `MISTI/` | 13 notebooks + 16 scripts | Programa MIT-Peru: fundamentos NumPy/Pandas, EDA, ML clásico, CNN, NLP, RL y proyecto final SAFEGUARD (detección de caídas con BlazePose + Random Forest + LSTM + Transformer, Recall=100%) | Python, TensorFlow, MediaPipe, OpenCV, scikit-learn |
 
 ---
 
