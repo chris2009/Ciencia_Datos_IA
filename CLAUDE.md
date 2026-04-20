@@ -26,7 +26,7 @@ Cada área temática vive en su propia carpeta con:
 
 | Área | Carpeta | Notebooks | Descripción | Stack |
 |------|---------|-----------|-------------|-------|
-| EDA | `EDA/` | 3 | EDA, transformaciones, outliers multivariados, calidad de datos | Python, Pandas, Seaborn, Scipy, Scikit-learn, PySpark, Databricks |
+| EDA | `EDA/` | 4 | EDA, transformaciones, outliers multivariados, calidad de datos, feature engineering, Visual Data Discovery | Python, Pandas, Seaborn, Scipy, Scikit-learn, PySpark, Databricks |
 
 ---
 

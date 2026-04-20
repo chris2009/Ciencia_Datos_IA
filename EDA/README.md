@@ -12,6 +12,7 @@ Todos los notebooks pertenecen al curso **MCD8009: Data Discovery** de la Maestr
 | 1 | [EDA.ipynb](EDA.ipynb) | Loan Prediction | EDA completo en Databricks + Spark SQL |
 | 2 | [EDA_ejercicio_practico_Boston_Housing.ipynb](EDA_ejercicio_practico_Boston_Housing.ipynb) | Boston Housing + Brazil Tourism + Salaries | EDA, missingness y outliers univariados |
 | 3 | [Transformaciones_Valores_Atpicos_Calidad_Datos.ipynb](Transformaciones_Valores_Atpicos_Calidad_Datos.ipynb) | Salaries SF + Ames House Prices + Solicitudes de crédito | Transformaciones, outliers multivariados, calidad de datos |
+| 4 | [Feature_Engineering_Data_Visualization.ipynb](Feature_Engineering_Data_Visualization.ipynb) | Ames Housing + Telco Customer Churn (5 CSVs) | Feature engineering, Visual Data Discovery, análisis ejecutivo de churn |
 
 ---
 
@@ -201,6 +202,85 @@ Implementación de 10 reglas de calidad con reporte de incumplimientos:
 - Las 10 reglas de calidad cubren casos reales de negocio (norma SBS, formato peruano)
 - **Observación:** R10 marca `SOL-00026` (ingreso negativo = -800) como violación de la regla de cuota. Matemáticamente es correcto (`-51.70 > 0.30 × -800 = -240`), pero semánticamente ese registro ya viola R5. Sería más robusto excluir de R10 los registros con ingreso ≤ 0
 
+### `Feature_Engineering_Data_Visualization.ipynb` ✅ Excelente — el más maduro
+- Paleta de colores constante definida al inicio (`CHURN_COLOR`, `RETAIN_COLOR`, `NEUTRAL_COLOR`) — coherencia visual total
+- Visualizaciones ejecutivas con etiquetas directas en barras, sin leyendas innecesarias
+- `observed=True` en todos los `groupby` con categóricas — buena práctica pandas
+- `sample(min(2000, len(df)), random_state=42)` para reproducibilidad en scatter geográfico
+- Merge encadenado de 5 CSVs limpio y sin redundancias (elimina columnas `Count` duplicadas)
+- Feature engineering con justificación de negocio en cada variable
+- Recomendaciones accionables sustentadas en evidencia de los gráficos
+- **Observación 1:** Min-Max scaling implementado manualmente — correcto, pero `MinMaxScaler` de sklearn es más seguro ante edge cases (división por cero si min == max)
+- **Observación 2:** `MUTED_COLOR = '#C0C0C0'` se redefine dentro de la Figura 1 en lugar de usar la constante global — inconsistencia menor
+- **Observación 3:** `warnings.filterwarnings('ignore')` global — suprime todas las advertencias, puede ocultar problemas reales en producción
+
+---
+
+### 4. `Feature_Engineering_Data_Visualization.ipynb` — Lab 4
+
+**Contexto:** Laboratorio sobre Feature Engineering y Visual Data Discovery. Trabajo colaborativo (equipo). Curso MCD8009 — UTEC.
+
+#### Parte 1 — Feature Engineering (Ames Housing)
+6 nuevas variables creadas sobre el dataset de viviendas de Ames:
+
+| # | Variable creada | Tipo | Técnica | Variable fuente |
+|---|-----------------|------|---------|-----------------|
+| 1 | `CentralAir_Enc` | Encoding binario | `.map({'Y':1,'N':0})` | `Central Air` |
+| 2 | `LotArea_Scaled` | Escalado | Min-Max manual | `Lot Area` |
+| 3 | `YearBuilt_Bin` | Discretización | `pd.cut()` en 4 bins | `Year Built` |
+| 4 | `TotalSF` | Variable compuesta | Suma de 3 áreas | `1st Flr SF + 2nd Flr SF + Total Bsmt SF` |
+| 5 | `HouseAgeAtSale` | Variable temporal | Diferencia de años | `Yr Sold - Year Built` |
+| 6 | `KitchenQual_Ord` | Encoding ordinal | Mapeo con orden lógico | `Kitchen Qual` (Ex/Gd/TA/Fa/Po → 5…1) |
+
+**Visualizaciones de los nuevos features:**
+- Scatter: `TotalSF` vs `SalePrice` → correlación positiva fuerte (más área = mayor precio)
+- Boxplot: `YearBuilt_Bin` vs `SalePrice` → viviendas nuevas tienen precios medianos más altos y mayor variabilidad
+- Countplot: distribución de `KitchenQual_Ord` → concentración en calidad media-alta (3-4)
+
+#### Parte 2 — Teoría de Visualización
+Respuestas conceptuales sobre:
+- Sobrecarga visual y cuándo se vuelve contraproducente
+- Elección de tipo de gráfico según pregunta analítica
+- Principios de visualización efectiva (Tufte, data-ink ratio)
+
+#### Parte 3 — Visual Data Discovery: Telco Customer Churn (trabajo integrador)
+
+**Fuente de datos:** 5 archivos CSV fusionados en un solo DataFrame de 7,043 clientes × múltiples variables.
+
+| Archivo CSV | Contenido |
+|-------------|-----------|
+| `Telco_customer_churn_demographics.csv` | Edad, género, estado civil |
+| `Telco_customer_churn_services.csv` | Contratos, servicios contratados |
+| `Telco_customer_churn_status.csv` | Churn label, razón, categoría |
+| `Telco_customer_churn_location.csv` | Ciudad, latitud, longitud, ZIP |
+| `Telco_customer_churn_population.csv` | Población por código postal |
+
+**Feature engineering sobre el dataset integrado:**
+- `Tenure_Segment`: `pd.cut()` en 5 intervalos (0-6m, 7-12m, 13-24m, 25-48m, 48+m)
+- `Pop_Segment`: `pd.qcut()` en 4 cuartiles de densidad poblacional
+
+**EDA previo a visualizaciones:**
+- Distribuciones de Age, Tenure, Monthly Charge, Total Charges por estado de churn
+- Top 10 razones de churn + categorías
+- Tasa de churn por tipo de contrato y tipo de internet
+- Efecto de 6 servicios adicionales sobre la tasa de churn
+- Análisis geográfico: ciudades con mayor concentración de clientes y churn
+
+**5 visualizaciones ejecutivas** (paleta: rojo=#E74C3C, verde=#2ECC71, gris=#C0C0C0):
+
+| # | Título | Insight principal |
+|---|--------|-------------------|
+| 1 | Tasa de Churn por Tipo de Contrato | Mes-a-Mes: 45.8% churn vs 2.5% en contratos de 2 años |
+| 2 | Antigüedad del Cliente vs Churn | Mayor riesgo en primeros 6 meses; >48m casi no churnan |
+| 3 | Categorías y Razones de Churn | Competencia (precio/oferta) > 40% de los churns |
+| 4 | Servicios como Anclas de Retención | Sin Online Security/Support: churn 40-50%; con servicio: ~15% |
+| 5 | Densidad Poblacional × Churn | Zonas media-baja y alta densidad: mayor tasa de abandono |
+
+**3 recomendaciones de negocio sustentadas:**
+1. Migrar clientes mes-a-mes a contratos largos con incentivos
+2. Bundle de servicios de seguridad/soporte para clientes de los primeros 6 meses
+3. Programa de contraoferta ante la competencia (precio + datos)
+
 ---
 
 ## Stack tecnológico
@@ -219,11 +299,12 @@ Implementación de 10 reglas de calidad con reporte de incumplimientos:
 
 ## Datasets utilizados
 
-| Dataset | Fuente | Registros |
-|---------|--------|-----------|
-| Loan Prediction | CSV local | 614 |
-| Boston Housing | CSV local / OpenML | ~506 |
-| Brazil Tourism | OpenML | — |
-| San Francisco Salaries | CSV local | 148,654 |
-| Ames House Prices | OpenML | 1,460 |
-| Solicitudes de crédito | CSV local | 200 |
+| Dataset | Fuente | Registros | Notebooks |
+|---------|--------|-----------|-----------|
+| Loan Prediction | CSV local | 614 | Lab 1 |
+| Boston Housing | CSV local / OpenML | ~506 | Lab 2 |
+| Brazil Tourism | OpenML | — | Lab 2 |
+| San Francisco Salaries | CSV local | 148,654 | Lab 2, Lab 3 |
+| Ames House Prices | OpenML / CSV local | 1,460 | Lab 3, Lab 4 |
+| Solicitudes de crédito | CSV local | 200 | Lab 3 |
+| Telco Customer Churn | CSV local (5 archivos) | 7,043 | Lab 4 |
