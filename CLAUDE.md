@@ -14,11 +14,16 @@ Cada área temática vive en su propia carpeta con:
 
 ---
 
-## Reglas de trabajo (obligatorias en cada cambio)
+## Reglas de trabajo — AUTOMÁTICAS, sin necesidad de que el usuario las pida
 
-1. Actualizar **este archivo** (`CLAUDE.md`) cuando cambie el contexto del proyecto
-2. Actualizar el **`README.md` raíz** para reflejar cualquier área nueva o modificación
-3. Hacer un **commit descriptivo** que explique qué se agregó/cambió y por qué
+Tras **cualquier** cambio en este repo, ejecutar siempre estos 4 pasos en el mismo turno:
+
+1. Actualizar **este archivo** (`CLAUDE.md`) — tabla de áreas, contadores
+2. Actualizar el **`README.md` raíz** — índice y tablas de notebooks
+3. Actualizar **`memory/project_context.md`** — estado actual de áreas
+4. Hacer un **commit descriptivo** — qué se agregó, qué algoritmos/datasets, por qué
+
+**Estas 4 acciones son el Definition of Done de cualquier tarea. No hay tarea terminada sin ellas.**
 
 ---
 
