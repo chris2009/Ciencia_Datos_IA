@@ -24,9 +24,9 @@ Cada área temática vive en su propia carpeta con:
 
 ## Áreas actuales
 
-| Área | Carpeta | Descripción | Stack |
-|------|---------|-------------|-------|
-| EDA | `EDA/` | Análisis exploratorio sobre dataset de préstamos bancarios | Python, Pandas, Seaborn, PySpark, Databricks |
+| Área | Carpeta | Notebooks | Descripción | Stack |
+|------|---------|-----------|-------------|-------|
+| EDA | `EDA/` | 3 | EDA, transformaciones, outliers multivariados, calidad de datos | Python, Pandas, Seaborn, Scipy, Scikit-learn, PySpark, Databricks |
 
 ---
 
